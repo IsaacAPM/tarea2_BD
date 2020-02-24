@@ -97,10 +97,11 @@ group by NomOrg, extract(year from c.FechaFin)
 --j. Escribir el nombre de las escuelas cuyos egresados han ganado algún lugar en más de dos
 --concursos distintos.
 
-select NomOrg
-from Escuela o, Estudió e, Tesis t, Concurso c, Ganó g
-where g.IdCon = c.IdCon and t.IdT = g.IdT and e.IdT = t.IdT and e.IdOrg = o.IdOrg
-having countdif(IdCon)
+select o.NomOrg
+from Organización o, Estudió e, Tesis t, Concurso c, Ganó g
+where o.Tipo = 'esc' and g.IdCon = c.IdCon and t.IdT = g.IdT and e.IdT = t.IdT and e.IdOrg = o.IdOrg
+group by o.NomOrg
+having count(c.IdCon) > 2
 
 --k. Listar el nombre de los concursos cuyo monto total de organización 
 --fue de al menos 100,000. Acompañarlos con el nombre de las organizaciones 
