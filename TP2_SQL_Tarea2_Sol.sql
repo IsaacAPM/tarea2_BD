@@ -28,9 +28,9 @@ order by extract(year from c.FechaFin) desc, Monto desc
 --d. Obtener el nombre de todas las carreras que son licenciaturas, junto con el nombre de las
 --universidades en que se imparten.
 
-select NomCar, NomOrg
-from Carrera c, Imparte i, Escuela e
-where c.Área like 'Licenciatura' and i.IdCar = c.IdCar and e.IdOrg = i.IdOrg
+select c.NomCar, o.NomOrg
+from Carrera c, Imparte i, Organización o
+where c.NomCar like 'Lic%' and i.IdCar = c.IdCar and o.IdOrg = i.IdOrg
 
 --e. Escribir el nombre de los concursos, y el año, en los cuales no participaron egresados del ITAM.
 --Ordenar ascendentemente por año.
