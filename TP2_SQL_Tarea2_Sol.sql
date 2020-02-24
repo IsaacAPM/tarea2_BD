@@ -158,11 +158,14 @@ where c.IdCar=i.IdCar and i.IdOrg=e.IdOrg
 --o. Listar el nombre de las tesis, y el de sus autores, 
 --que han participado en más concursos.
 
-select NomT, NomA, count(*) from Tesis t, Ganó g, Estudió e, Autor a
-    where t.IdT=g.IdT and i.idT=e.IdT and e.IdA=a.IdA
-    group by t.IdT having count(*) >= all(select count(*) from Tesis t, Ganó g where t.IdT=g.IdT
-    group by t.IdT)
-
+select NomT, NomA
+from Tesis t, Ganó g, Estudió e, Autor a
+where t.IdT = g.IdT and t.IdT = e.IdT and e.IdA = a.IdA
+group by  NomT, NomA
+having count(*) >= all(select count(*) 
+  from Tesis t, Ganó g 
+  where t.IdT=g.IdT
+  group by t.IdT)
 
 --p. Escribir el nombre de las organizaciones (escuelas o empresas) 
 --que han participado en la
