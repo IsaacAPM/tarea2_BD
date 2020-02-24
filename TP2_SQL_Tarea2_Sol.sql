@@ -62,9 +62,15 @@ and t.NomT in (select NomT
 
 select NomA, NomCar
 from Autor a, Estudió e, Carrera ca, Tesis t, Ganó g, Concurso co
-where extract(co.FechaFin, year) < '2020' and extract(co.FechaIni, year) = '2019' and co.IdCon in (select IdCon from Concurso c where extract(c.FechaFin, year) = '2020' and extract(c.FechaIni, year) = '2020') 
-and e.IdA = a.IdA and e.IdCar = ca.IdCar and t.IdT = e.IdT and g.IdT = t.IdT and co.IdCon = g.IdCon
-order by NomA desc
+where extract (year from FechaFin) = extract(year from sysdate)-1 
+  and extract (year from FechaIni) = extract(year from sysdate)-1 
+  and a.NomA in (select NomA
+    from Autor a, Estudió e, Carrera ca, Tesis t, Ganó g, Concurso co
+    where extract (year from FechaFin) = extract(year from sysdate) 
+      and extract (year from FechaIni) = extract(year from sysdate) 
+      and e.IdA = a.IdA and e.IdCar = ca.IdCar and t.IdT = e.IdT and g.IdT = t.IdT and co.IdCon = g.IdCon) 
+  and e.IdA = a.IdA and e.IdCar = ca.IdCar and t.IdT = e.IdT and g.IdT = t.IdT and co.IdCon = g.IdCon
+group by NomA,NomCar
 
 --h. Obtener el nombre de los alumnos que egresaron de alguna carrera del área de ‘Administrativas’
 --o que participaron en algún concurso celebrado este año.
