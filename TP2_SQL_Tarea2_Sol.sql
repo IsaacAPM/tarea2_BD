@@ -108,9 +108,16 @@ having count(c.IdCon) > 2
 --participantes, ordenando ascendentemente por nombre del concurso y descendentemente 
 --por el de la organización.
 
-select NomCon,NomOrg from Concurso c, Organizó o, Organización org
-    where c.IdCon=o.IdCon and o.IdOrg=org.IdOrg and o.Monto>=100000
-    order by NomCom asc, NomOrg desc
+select NomCon,NomOrg
+from Concurso c, Organizó o, Organización org
+where c.NomCon in (select NomCon
+    from Concurso c, Organizó o, Organización org
+    where c.IdCon=o.IdCon and o.IdOrg=org.IdOrg
+    group by NomCon
+    having sum(Monto)>=100000) 
+  and c.IdCon=o.IdCon and o.IdOrg=org.IdOrg
+group by NomCon, NomOrg
+order by NomCon asc, NomOrg desc
 
 --l. Encontrar el nombre de los autores que ganaron el 
 --primer lugar en máximo un concurso durante el año pasado. 
