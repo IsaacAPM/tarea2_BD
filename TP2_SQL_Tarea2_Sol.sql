@@ -123,10 +123,12 @@ order by NomCon asc, NomOrg desc
 --primer lugar en máximo un concurso durante el año pasado. 
 --Acompañarlos con el nombre de la tesis con la cual ganaron.
 
-select NomA,NomT from Autor a, Estudió e, Tesis t, Ganó g, Concurso c 
-    where a.IdA=e.IdA and e.IdT=t.IdT and t.IdT=g.IdT and g.IdCon=c.IdCon
-        and g.lugar=1 and extract(year from c.FechaIni)=extract(year from sysdate)-1
-        group by NomA having count(*)<=1
+select NomA,NomT 
+from Autor a, Estudió e, Tesis t, Ganó g, Concurso c 
+where a.IdA=e.IdA and e.IdT=t.IdT and t.IdT=g.IdT and g.IdCon=c.IdCon
+  and g.lugar=1 and extract(year from c.FechaIni)=extract(year from sysdate)-1
+group by NomA, NomT
+having count(*)<=1
 
 --m. Obtener el nombre de la(s) organización(es) que más 
 --concursos ha(n) organizado.
