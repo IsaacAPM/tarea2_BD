@@ -133,9 +133,11 @@ having count(*)<=1
 --m. Obtener el nombre de la(s) organización(es) que más 
 --concursos ha(n) organizado.
 
-select NomOrg from Organizó o, Organización org
-    where o.IdOrg=org.IdOrg 
-    group by org.NomOrg having count(*) >= all(select count(*) from Organizó o, Organización org
+select NomOrg 
+from Organizó o, Organización org
+where o.IdOrg=org.IdOrg 
+group by org.NomOrg having count(*) >= all(select count(*) 
+    from Organizó o, Organización org
     where o.IdOrg=org.IdOrg 
     group by org.NomOrg)
 
