@@ -145,9 +145,11 @@ group by org.NomOrg having count(*) >= all(select count(*)
 --participaciones en los concursos. Mostrar también el nombre 
 --de las universidades en que se imparten.
 
-select NomCar, NomOrg from Carrera c, Imparte i, Escuela e
-    where c.IdCar=i.IdCar and i.IdOrg=e.IdOrg
-        and NomCar in (select NomCar from Ganó g, Tesis t, Estudió e, Carrera c
+select c.NomCar, e.NomOrg 
+from Carrera c, Imparte i, Organización e
+where c.IdCar=i.IdCar and i.IdOrg=e.IdOrg
+  and NomCar in (select NomCar 
+    from Ganó g, Tesis t, Estudió e, Carrera c
     where g.IdT=t.IdT and t.IdT=e.IdT and e.IdCar=c.IdCar
     group by NomCar having count(*) <= all(select count(*) from Ganó g, Tesis t, Estudió e, Carrera c
     where g.IdT=t.IdT and t.IdT=e.IdT and e.IdCar=c.IdCar
