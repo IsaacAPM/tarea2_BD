@@ -1,3 +1,18 @@
+--k. Listar el nombre de los concursos cuyo monto total de organización 
+--fue de al menos 100,000. Acompañarlos con el nombre de las organizaciones 
+--participantes, ordenando ascendentemente por nombre del concurso y descendentemente 
+--por el de la organización.
+
+select NomCon,NomOrg from Concurso c, Organizó o, Organización org
+    where c.IdCon=o.IdCon and o.IdOrg=org.IdOrg and o.Monto>=100000
+    order by NomCom asc, NomOrg desc
+
+--l. Encontrar el nombre de los autores que ganaron el 
+--primer lugar en máximo un concurso durante el año pasado. 
+--Acompañarlos con el nombre de la tesis con la cual ganaron.
+
+
+
 --m. Obtener el nombre de la(s) organización(es) que más 
 --concursos ha(n) organizado.
 
