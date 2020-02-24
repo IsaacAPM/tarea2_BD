@@ -20,10 +20,10 @@ order by NomCon desc, NomT asc
 --c. Mostrar el nombre de las empresas que han participado en la organización de concursos con
 --montos mínimos de 40,000. Ordenar descendentemente por año y por monto.
 
-select NomOrg, extract(c.FechaFin, year), Monto
-from Organizó o, Empresa e, Concurso c
+select e.NomOrg, extract(year from c.FechaFin), Monto
+from Organizó o, Organización e, Concurso c
 where o.Monto >= 40000 and o.IdOrg = e.IdOrg and c.IdCon = o.IdCon
-order by (extract(c.FechaFin, year), Monto) desc
+order by extract(year from c.FechaFin) desc, Monto desc
 
 --d. Obtener el nombre de todas las carreras que son licenciaturas, junto con el nombre de las
 --universidades en que se imparten.
