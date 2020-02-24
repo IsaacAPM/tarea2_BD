@@ -89,9 +89,10 @@ where extract (year from FechaFin) = extract(year from sysdate)
 
 --i. Por empresa y por año, contar la cantidad de concursos que han organizado.
 
-select NomOrg, extract(c.FechaFin, year), count(*)
+select NomOrg, extract(year from c.FechaFin), count(*)
 from Organización org, Organizó o, Concurso c
-where org.Tipo like 'Empresa' and o.IdOrg = org.IdOrg and o.IdCon = c.IdCon
+where org.Tipo = 'emp' and o.IdOrg = org.IdOrg and o.IdCon = c.IdCon
+group by NomOrg, extract(year from c.FechaFin)
 
 --j. Escribir el nombre de las escuelas cuyos egresados han ganado algún lugar en más de dos
 --concursos distintos.
