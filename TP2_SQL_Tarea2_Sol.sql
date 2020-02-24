@@ -49,8 +49,12 @@ order by extract(year from c.FechaFin) asc
 
 select NomT
 from Tesis t, Ganó g, Concurso c
-where c.NomCon like 'BANAMEX' and extract(c.FechaFin, year) < '2020' and extract(c.FechaIni, year) = '2019' and t.IdT = g.IdT and g.IdCon = c.IdCon and t.NomT in (select NomT from Tesis t, Ganó g, Concurso c
-where c.NomCon like 'AMIME' and extract(c.FechaFin, year) < '2020' and extract(c.FechaIni, year) = '2019' and t.IdT = g.IdT and g.IdCon = c.IdCon)
+where c.NomCon like 'BANAMEX%' and extract (year from FechaFin) = extract(year from sysdate)-1 and 
+extract (year from FechaIni) = extract(year from sysdate)-1 and t.IdT = g.IdT and g.IdCon = c.IdCon 
+and t.NomT in (select NomT 
+    from Tesis t, Ganó g, Concurso c
+    where c.NomCon like 'AMIME%' and extract (year from FechaFin) = extract(year from sysdate)-1 
+    and extract (year from FechaIni) = extract(year from sysdate)-1 and t.IdT = g.IdT and g.IdCon = c.IdCon)
 
 --g. Mostrar el nombre de los autores que participaron en algún concurso tanto el año pasado como
 --éste (en ambos, no sólo en uno u otro). Acompañarlos con el nombre de la(s) carrera(s) de la(s)
