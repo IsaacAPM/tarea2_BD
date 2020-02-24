@@ -13,8 +13,8 @@ order by NomOrg desc
 --descendentemente por nombre del concurso y ascendentemente por nombre de la tesis.
 
 select NomT, NomCon
-from Tesis t, Concurso c
-where extract(c.FechaFin, year) < '2020' and extract(c.FechaIni, year) = '2019' and t.IdT = c.IdT
+from Tesis t, Concurso c, Ganó g
+where extract (year from FechaFin) = extract(year from sysdate)-1 and extract (year from FechaIni) = extract(year from sysdate)-1 and t.IdT = g.IdT and c.IdCon = g.IdCon
 order by NomCon desc, NomT asc
 
 --c. Mostrar el nombre de las empresas que han participado en la organización de concursos con
