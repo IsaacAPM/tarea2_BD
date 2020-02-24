@@ -170,9 +170,9 @@ having count(*) >= all(select count(*)
 --p. Escribir el nombre de las organizaciones (escuelas o empresas) 
 --que han participado en la
 --organización de todos los concursos registrados.
-
-select NomOrg, count(*) from Concurso c, Organizó o
-    where c.IdCon=o.IdCon 
-    group by NomOrg having count(*)=(select count(*) from concurso)
-
-
+                                       
+select NomOrg 
+from Concurso c, Organizó o, Organización org
+where c.IdCon=o.IdCon and org.IdOrg = o.IdOrg
+group by NomOrg 
+having count(*)=(select count(*) from Concurso)
