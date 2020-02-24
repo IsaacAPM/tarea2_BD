@@ -1,3 +1,6 @@
+--Diego Pérez Reyes
+--Isaac Alejandro Pimentel Morales 
+
 --a. Escribir el nombre de las universidades que tienen carreras en el área de ‘Ingeniería’, junto con
 --el nombre de dichas carreras y el de sus egresados.
 
