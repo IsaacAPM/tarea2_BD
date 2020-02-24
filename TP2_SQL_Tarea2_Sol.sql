@@ -77,13 +77,15 @@ group by NomA,NomCar
 
 select NomA
 from Autor a, Carrera c, Estudió e
-where c.Área like 'Administrativas' and c.IdCar = e.IdCar and e.IdA = a.IdA
+where c.Área like 'Admin%' and c.IdCar = e.IdCar and e.IdA = a.IdA
 
 union
 
 select NomA
 from Autor a, Estudió e, Tesis t, Ganó g, Concurso c
-where extract(c.FechaFin, year) = '2020' and extract(c.FechaIni, year) = '2020' and g.IdCon = c.IdCon and t.IdT = g.IdT and e.IdT = t.IdT and e.IdA = a.IdA
+where extract (year from FechaFin) = extract(year from sysdate) 
+  and extract (year from FechaIni) = extract(year from sysdate)
+  and g.IdCon = c.IdCon and t.IdT = g.IdT and e.IdT = t.IdT and e.IdA = a.IdA
 
 --i. Por empresa y por año, contar la cantidad de concursos que han organizado.
 
