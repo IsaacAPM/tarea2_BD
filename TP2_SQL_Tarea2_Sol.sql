@@ -5,9 +5,9 @@
 --el nombre de dichas carreras y el de sus egresados.
 
 select NomOrg, NomCar, NomA 
-from Escuela e, Autor a, Carrera c, Estudió es
-where c.Área like 'Ingeniería' and es.IdCar = c.IdCar and es.IdA = a.IdA and es.IdCar = c.IdCar
-order by NomOrd desc
+from Organización o, Autor a, Carrera c, Estudió e
+where c.Área = 'Ingeniería' and e.IdCar = c.IdCar and e.IdA = a.IdA and e.IdCar = c.IdCar and e.IdOrg = o.IdOrg
+order by NomOrg desc
 
 --b. Listar el título de las tesis que participaron en concursos del año pasado. Ordenar
 --descendentemente por nombre del concurso y ascendentemente por nombre de la tesis.
