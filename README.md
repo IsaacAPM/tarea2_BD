@@ -1,5 +1,7 @@
 Bases de Datos ITAM
+
 Dr. Felipe López G.
+
 3 – Tarea no. 2: Utilizando la base de datos de Concursos-Tesis contesta las siguientes preguntas
 empleando frases select (recuerda que cualquier autor que aparezca en la base de datos ya es
 ganador, sin importar que lugar haya ganado; también recuerda que las organizaciones se dividen
