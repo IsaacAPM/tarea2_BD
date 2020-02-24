@@ -35,9 +35,14 @@ where c.NomCar like 'Lic%' and i.IdCar = c.IdCar and o.IdOrg = i.IdOrg
 --e. Escribir el nombre de los concursos, y el año, en los cuales no participaron egresados del ITAM.
 --Ordenar ascendentemente por año.
 
-select NomCon, extract(c.FechaFin, year)
+select c.NomCon, extract(year from c.FechaFin) 
 from Concurso c, Ganó g, Tesis T, Estudió e, Organización o
-where o.NomOrg not like 'ITAM' and o.IdOrg = e.IdOrg and e.IdT = t.IdT and g.IdT = t.IdT and c.IdCon = g.IdCon
+where c.NomCon not in (select c.NomCon
+    from Concurso c, Ganó g, Tesis T, Estudió e, Organización o
+    where o.NomOrg = 'ITAM' and o.IdOrg = e.IdOrg and e.IdT = t.IdT and g.IdT = t.IdT and c.IdCon = g.IdCon) 
+and o.IdOrg = e.IdOrg and e.IdT = t.IdT and g.IdT = t.IdT and c.IdCon = g.IdCon
+group by c.NomCon, extract(year from c.FechaFin)
+order by extract(year from c.FechaFin) asc
  
 --f. Listar el nombre de las tesis que ganaron algún lugar en los concursos BANAMEX y AMIME
 --del año pasado (en ambos, no sólo en uno u otro).
