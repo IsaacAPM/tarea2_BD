@@ -3,7 +3,6 @@
 --Diego Pérez Reyes - 181059
 --Isaac Alejandro Pimentel Morales - 184041
 
-
 --PROBLEMAS
 --a. Escribir el nombre de las universidades que tienen carreras en el área de ‘Ingeniería’, junto con
 --el nombre de dichas carreras y el de sus egresados.
